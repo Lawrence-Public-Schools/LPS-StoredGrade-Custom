@@ -1,0 +1,21 @@
+<!-- use jQuery to replace text -->
+<script type="text/javascript">
+function lpsfixtextbox() {
+    let objComment = $j("input#excludefromtranscripts_true").parentsUntil("tbody","tr").next().find("textarea");
+    let valueComment = objComment[0].value;
+    valueComment = valueComment.replace(/(?:\r|\n|\r\n)/g, " ; ");
+    valueComment = valueComment.replace(/(?:,)/g, " ; ");
+    valueComment = valueComment.replace(/(?:\t)/g, " ; ");
+    objComment[0].value = valueComment;
+}
+
+function lpsaddhooksnewstoredgrade() {
+    lpsfixtextbox();
+    $j("input#excludefromtranscripts_true").parentsUntil("tbody","tr").next().find("textarea").on("input selectionchange propertychange", function () {
+        lpsfixtextbox();
+    });
+
+}
+
+$j(document).ready(lpsaddhooksnewstoredgrade);
+</script>
