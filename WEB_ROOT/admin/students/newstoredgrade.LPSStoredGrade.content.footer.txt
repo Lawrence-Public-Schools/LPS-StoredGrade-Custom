@@ -1,0 +1,21 @@
+<!-- use jQuery to replace text -->
+<script type="text/javascript">
+function lpsfixtextbox() {
+    let objComment = $j("textarea[name*='comment']");
+    let valueComment = objComment[0].value;
+    valueComment = valueComment.replace(/(?:\r|\n|\r\n)/g, " ; ");
+    valueComment = valueComment.replace(/(?:,)/g, " ; ");
+    valueComment = valueComment.replace(/(?:\t)/g, " ; ");
+    objComment[0].value = valueComment;
+}
+
+function lpsaddhooksnewstoredgrade() {
+    lpsfixtextbox();
+    $j("textarea[name*='comment']").on("input selectionchange propertychange", function () {
+        lpsfixtextbox();
+    });
+
+}
+
+$j(document).ready(lpsaddhooksnewstoredgrade);
+</script>
